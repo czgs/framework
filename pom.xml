@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.test</groupId>
+  <artifactId>framework</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>DBUtils</module>
+  </modules>
+  <packaging>pom</packaging>
+
+  <name>framework</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <!-- 设置整个maven项目的编码格式 -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- 配置控制台输出的编码格式，解决maven在控制台输出乱码 -->
+    <argLine>-Dfile.encoding=UTF-8</argLine>
+    <!-- 统一设置依赖jar的版本号,标签名可以自定义
+         通常都以"项目名.version""的方式命名-->
+    <mysql.version>5.1.38</mysql.version>
+    <!-- 统一设置依赖jar的版本号,标签名可以自定义
+         通常都以"项目名.version""的方式命名-->
+    <junit.version>4.12</junit.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <!-- 配置maven编译插件,maven默认使用1.5来编译源码
+           则可能会导致新版本的jdk语法无法编译，因此配置maven
+           编译插件的目的就是告诉maven使用我们指定的JDK版本来编译-->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <target>1.8</target>
+          <source>1.8</source>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- 添加Junit依赖-->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>
